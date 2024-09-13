@@ -24,7 +24,7 @@ moon.dy = 1e3
 moon.mass = 7.34767309e22
 earth.dz = 0.00001
 spaceData = [moon, earth]
-simLength = 1200
+simLength = 1400
 @assert simLength > 250
     
 
