@@ -1,5 +1,9 @@
 module NBodyProblem
+export runSimulation, f
 
-# Write your package code here.
+include("NumericalMethods/SymplecticEuler.jl")
+include("SimCalc/SimCalc.jl")
+
+using .SimCalc
 
 end
