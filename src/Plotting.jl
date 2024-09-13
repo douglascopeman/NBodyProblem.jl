@@ -20,7 +20,8 @@ gr()
 end
 
 function animation(model, simLength::Int64, modelHamiltonian)
-    anim = @animate for i ∈ 1:20000:simLength
+    anim = @animate for i ∈ 1:(simLength ÷ 100):simLength
+        print(i)
         modelplot(model[:,1,1], model[:,2,1], i, c=:thermal)
         for p = 2:(size(model)[3])
             modelplot!(model[:,1,p], model[:,2,p], i, c=:thermal, markersize = 5)
