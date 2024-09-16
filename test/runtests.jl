@@ -15,8 +15,8 @@ p3.pos = [3.93e8, 0, 0]
 p3.vel = [0, -0.75e3, 0]
 p3.mass = 7.34767309e22
 
-spaceData = [moon, earth, p3]
-simLength = 1000000
+spaceData = [moon, earth]
+simLength = 100000
 @assert simLength > 250
 
 dt = 20
