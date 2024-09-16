@@ -1,5 +1,5 @@
 module NBodyProblem
-export runSimulation, Body, animation
+export runSimulation, Body, animation, plotHamiltonian
 
 include("ModelSpace/ModelSpace.jl")
 include("NumericalMethods/SymplecticEuler.jl")

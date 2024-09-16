@@ -1,6 +1,6 @@
 module Plotting
 
-export animation
+export animation, plotHamiltonian
 
 using Plots
 gr()
@@ -33,5 +33,8 @@ function animation(model, simLength::Int64, modelHamiltonian)
     gif(anim, fps = 20)
 end
 
+function plotHamiltonian(modelHamiltonian)
+    plot(modelHamiltonian)
+end
 
 end
