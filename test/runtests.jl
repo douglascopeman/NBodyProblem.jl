@@ -1,7 +1,8 @@
 using Revise
 using NBodyProblem
-using Test
-using HDF5
+# using Test
+# using HDF5
+using BenchmarkTools
 
 # Defining the model space
 moon = Body()
@@ -13,24 +14,26 @@ moon.vel = [0, 1e3, 0]
 moon.mass = 7.34767309e22
 
 p3.pos = [3.93e8, 0, 0]
-p3.vel = [0, -0.75e3, 0]
+p3.vel = [0, -1e3, 0]
 p3.mass = 7.34767309e22
 
-spaceData = [moon, earth]
+spaceData = [moon, earth, p3]
 simLength = 1000000
 @assert simLength > 250
 
 dt = 20
+
+@btime
     
 
 model, modelHamiltonian = runSimulation(spaceData, simLength, dt)
 
-animation(model, simLength, modelHamiltonian)
+animation(model, (simLength ÷ 1000), modelHamiltonian)
 
-plotHamiltonian(modelHamiltonian)
+ plotHamiltonian(modelHamiltonian)
 
-h5write("/tmp/test1.h5", "model", model)
+# h5write("/tmp/test1.h5", "model", model)
 
-@testset "NBodyProblem.jl" begin
-    NBodyProblem.simulation(1,2)
-end
+# @testset "NBodyProblem.jl" begin
+#     NBodyProblem.simulation(1,2)
+# end

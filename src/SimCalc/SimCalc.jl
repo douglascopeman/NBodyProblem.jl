@@ -58,15 +58,16 @@ Builds a 3 dimensional array filled with the 3 axes position data of every body 
 """
 function runSimulation(spaceData::Vector{Body}, simLength::Int64, dt::Int64)
     nBodies = length(spaceData)
-    simulation = zeros(Float64, (simLength, 6, nBodies))  # Simulation length by axes by number of bodies
+    simulation = zeros(Float64, ((simLength ÷ 1000), 6, nBodies))  # Simulation length by axes by number of bodies
     modelHamiltonian = zeros(Float64, simLength)
     for i=1:simLength
         α = accelerationCalc(spaceData)     # Gives acceleration values at timestep n for all bodies and all axes
         SymplecticEuler.symplecticEuler(spaceData, α, dt) # Updates each instance of the class
-        for p=1:nBodies
-            simulation[i,:,p] = [spaceData[p].pos; spaceData[p].vel]   # Fills relevent timestep and body in the array with the position data
+        if i % 1000 == 0 
+            for p=1:nBodies
+                simulation[(i ÷ 1000),:,p] = [spaceData[p].pos; spaceData[p].vel]   # Fills relevent timestep and body in the array with the position data
+            end
         end
-
         modelHamiltonian[i] = Hamiltonian(spaceData)    # Current velocity data used to calculate the current hamiltonian
     end
     return simulation, modelHamiltonian

@@ -20,17 +20,17 @@ gr()
 end
 
 function animation(model, simLength::Int64, modelHamiltonian)
-    anim = @animate for i ∈ 1:(simLength ÷ 100):simLength
-        print(i)
+    anim = @animate for i ∈ 1:simLength
+        #print("\n", i)
         modelplot(model[:,1,1], model[:,2,1], i, c=:thermal)
         for p = 2:(size(model)[3])
             modelplot!(model[:,1,p], model[:,2,p], i, c=:thermal, markersize = 5)
         end
         #annotate!("time= $(rpad(round(i/3; digits=2),4,"0")) s")
-        annotate!(-3e8, 5.5e8, "Hamiltonian= $(rpad(round(modelHamiltonian[i]; digits=2),4,"0"))")
-    end
+        #annotate!(-3e8, 5.5e8, "Hamiltonian= $(rpad(round(modelHamiltonian[i]; digits=2),4,"0"))")
+    end 
     
-    gif(anim, fps = 20)
+    gif(anim, "anim.gif", fps = 20)
 end
 
 function plotHamiltonian(modelHamiltonian)
